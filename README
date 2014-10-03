@@ -1,0 +1,45 @@
+NTPTIME API
+
+---
+SETUP
+
+cd build
+cmake ..
+make
+sudo make install
+
+---
+DEPS
+
+* vu_tools
+* glink
+* shmci
+* pthread
+* iniparser
+
+---
+Compile with -DNTPTIMED_DEBUG to see debugging messages
+Compile with -O2 -fomit-frame-pointers for faster execution
+Also you could try -march=native
+
+---
+PLOTTING FAST HELP
+
+1 Testing syncronizer:
+- run test_sync_ts with required connection and other options for several minutes,
+  this will allow you to collect sufficient amount of timestamps for analys, terminate with Ctrl+C
+  (Ex.: ./test_sync_ts -d/dev/ttyM0 -s115200 -l/tmp/dump.bin)
+- run plot_sync_ts.py Python to plot graph and show some statictics on the
+  collected data
+  (Ex.: ./plot_sync_ts.py /tmp/dump.bin x)
+
+2 Testing ntptimed:
+- run ntptime_client with required connection and other options for several minutes,
+  this will allow you to collect sufficient amount of timestamps for analys, terminate with Ctrl+C;
+  binary file will be ./log.bin
+  (Ex.: ./ntptime_client -t --refresh 100000)
+- run plot_ntptimed_ts.py Python to plot graph and show some statictics on the
+  collected data
+  (Ex.: ./plot_ntptimed_ts.py ../build/log.bin x)
+
+Note: you'll might want to change paths in examples.
